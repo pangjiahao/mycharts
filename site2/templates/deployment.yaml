@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: iot-deployment
+    labels:
+        app: iot
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: iot
+    template:
+        metadata: 
+            labels:
+                app: iot
+        spec:
+            containers:
+                -   name: nginx
+                    image: iotkitkat/nginx:i386-latest
+                    ports:
+                    -   containerPort: 80
+                -   name: webserver
+                    image: iotkitkat/webserver:i386-latest
+                    ports:
+                    -   containerPort: 3237
